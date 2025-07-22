@@ -32,7 +32,7 @@ func DisableVirtualTerminal(fd uintptr) error {
 	if err := syscall.GetConsoleMode(syscall.Handle(fd), &mode); err != nil {
 		return err
 	}
-	mode ^= windows.ENABLE_VIRTUAL_TERMINAL_PROCESSING
+	mode &^= windows.ENABLE_VIRTUAL_TERMINAL_PROCESSING
 
 	if err := windows.SetConsoleMode(windows.Handle(fd), mode); err != nil {
 		return err
